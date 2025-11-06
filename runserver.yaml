@@ -1,0 +1,7 @@
+homepage:
+  menu:
+    replace:
+
+      - desc: Recibo Pago
+        screenName: recibo-pago
+        img: "/src/client/assets/logo.jpg"
