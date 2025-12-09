@@ -9,8 +9,9 @@
 //export const urlGenearIdPSE='https://uniminuto.api.digibee.io/pipeline/uniminuto/v1/pasarelas-pago/linkPagoZonaPagos';
 //export const urlPagoPSE= 'https://www.zonapagos.com/t_uniminuto/pago.asp?estado_pago=iniciar_pago&identificador='
 
+// TODO:: Para producccion cambiar la url urlObtenerCondicionesPago
 //DATOS DE DESARROLLO
-export const urlObtenerCondicionesPago = 'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/consultas-financieras/ObtenerCondicionesPago';
+export const urlObtenerCondicionesPago = 'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/consultas-financieras/ObtenerCondicionesPagoNuevos'//'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/consultas-financieras/ObtenerCondicionesPago';
 export const urlGenerarReciboPago = 'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/consultas-financieras/GenerarReciboPago';
 export const urlGetUserDetails = 'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/servicios-banner/getUserDetails';
 export const urlObtenerProgramasInscritos = 'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/estudiante/ObtenerProgramasInscritos';
