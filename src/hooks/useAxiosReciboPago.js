@@ -1,6 +1,6 @@
 import axios from "axios";
 import { mostrarAlertaError } from "../helpers/alertasHelper";
-import { urlGenerarReciboPago, apikey, urlRutaBaseRecibos,urlGenearIdPSE } from "../helpers/serviciosUrl";
+import { urlGenerarReciboPago, apikey, urlRutaBaseRecibos, urlGenearIdPSE } from "../helpers/serviciosUrl";
 
 export const useAxiosReciboPago = () => {
 
@@ -16,6 +16,16 @@ export const useAxiosReciboPago = () => {
             }, {})
         );
 
+        //Objeto estatico que se debe anexar a las condiciones de pago solo aplica para estudiantes nuevos
+        const adicionalNuevos = {
+            Signo: "-",
+            DescripcionCondicion: "MATRICULA NUEVO",
+            Importe: "0",
+            TipoCondicion: "NUEV",
+            Cliente: "500",
+            TipoImporte: "N",
+            Periodo: infoPrograma[0].FechaAdmision
+        }
         //console.log({infoCondicionesPagoSinDuplicados});
 
 
@@ -31,7 +41,7 @@ export const useAxiosReciboPago = () => {
                     Email: userData.Email,//"stefania.betancourt@uniminuto.edu.co",
                     CondicionesFacturacion: {
                         //CondicionFacturacion: infoCondicionesPago
-                        CondicionFacturacion: infoCondicionesPagoSinDuplicados
+                        CondicionFacturacion: [...infoCondicionesPagoSinDuplicados,adicionalNuevos]
                     }
                 }
             }
@@ -63,7 +73,7 @@ export const useAxiosReciboPago = () => {
 
     }
 
-    const obtenerIdPSE = async (IdImporte,PeriodoId,datosEstudiante) => {
+    const obtenerIdPSE = async (IdImporte, PeriodoId, datosEstudiante) => {
 
         const dataContract = {
             Estudiante: {
