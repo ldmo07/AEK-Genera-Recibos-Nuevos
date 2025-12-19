@@ -27,7 +27,7 @@ export const useAxiosReciboPago = () => {
             Periodo: infoPrograma[0].FechaAdmision
         }
         //console.log({infoCondicionesPagoSinDuplicados});
-
+        
 
         const dataContract = {
             GenerarReciboPago: {
