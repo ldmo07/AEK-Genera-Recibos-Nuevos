@@ -1,5 +1,5 @@
 import axios from "axios";
-import { mostrarAlertaError,  mostrarAlertaExitoSinTimer, mostrarAlertaFalloSinTimer } from "../helpers/alertasHelper";
+import { mostrarAlertaError, mostrarAlertaExitoSinTimer, mostrarAlertaFalloSinTimer } from "../helpers/alertasHelper";
 import { urlObtenerCondicionesPago, apikey } from "../helpers/serviciosUrl"
 export const useAxiosCondicionesPago = () => {
 
@@ -30,7 +30,7 @@ export const useAxiosCondicionesPago = () => {
         try {
             const { data } = await axios.post(url, dataContract, { headers });
             if (data.Envelope.Body.ObtenerCondicionesPagoResponse.ObtenerCondicionesPagoResponse.CondicionesFacturacion === "") {
-                
+
 
                 const fechaActual = new Date();
                 const dia = fechaActual.getDate();
@@ -42,7 +42,7 @@ export const useAxiosCondicionesPago = () => {
                 const mensaje = data.Envelope.Body.ObtenerCondicionesPagoResponse.ObtenerCondicionesPagoResponse.ResultadoTransaccion.Mensaje;
                 if (codigo === "Z8008") {
                     mostrarAlertaExitoSinTimer(`${fechaCompleta} Matriculas - El recibo de pago ya fue registrado como pagado, por favor acercarse al área de facturación de su sede`);
-                }else{
+                } else {
                     mostrarAlertaFalloSinTimer(`(${fechaCompleta}) Código de error: ${codigo}  Descripción de error:${mensaje}`)
                 }
                 return;
@@ -50,7 +50,15 @@ export const useAxiosCondicionesPago = () => {
 
             const { CondicionFacturacion } = data.Envelope.Body.ObtenerCondicionesPagoResponse.ObtenerCondicionesPagoResponse.CondicionesFacturacion;
             //console.log(CondicionFacturacion,data);
-            return CondicionFacturacion;
+
+            //Filrtos condiciones de pago que no sean ZDU1 O UN ZDU2 , ZRU1 , ZRU2
+            const tiposExcluidos = ["ZDU1", "ZDU2", "ZRU1", "ZRU2"];
+            const condicionesFacturacionFiltrados = CondicionFacturacion.filter(
+                x => !tiposExcluidos.includes(x.TipoCondicion)
+            );
+
+            //return CondicionFacturacion;
+            return condicionesFacturacionFiltrados;
 
         } catch (error) {
             mostrarAlertaError("Error consultando Condiciones de pago");

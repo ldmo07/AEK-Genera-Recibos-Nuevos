@@ -27,9 +27,7 @@ export const useAxiosReciboPago = () => {
             Periodo: infoPrograma[0].FechaAdmision
         }
         //console.log({infoCondicionesPagoSinDuplicados});
-
-        //Filrtos condiciones de pago que no sean ZDU1 O UN ZDU2 , ZRU1 , ZRU2
-        infoCondicionesPagoSinDuplicadosFiltrados = infoCondicionesPagoSinDuplicados.filter(x=>x.TipoCondicion !="ZDU1" && x.TipoCondicion != "ZDU2" && x.TipoCondicion !="ZRU1" && x.TipoCondicion !="ZRU2")
+        
 
         const dataContract = {
             GenerarReciboPago: {
@@ -43,8 +41,7 @@ export const useAxiosReciboPago = () => {
                     Email: userData.Email,//"stefania.betancourt@uniminuto.edu.co",
                     CondicionesFacturacion: {
                         //CondicionFacturacion: infoCondicionesPago
-                        //CondicionFacturacion: [...infoCondicionesPagoSinDuplicados,adicionalNuevos]
-                        CondicionFacturacion: [...infoCondicionesPagoSinDuplicadosFiltrados,adicionalNuevos]
+                        CondicionFacturacion: [...infoCondicionesPagoSinDuplicados,adicionalNuevos]
                     }
                 }
             }
