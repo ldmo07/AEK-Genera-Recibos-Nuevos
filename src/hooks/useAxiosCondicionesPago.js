@@ -7,8 +7,8 @@ export const useAxiosCondicionesPago = () => {
     const obtenerCondicionesPago = async (programa = {}, idEstudiante = '') => {
 
         const dataContract = {
-            ObtenerCondicionesPago: {
-                ObtenerCondicionesPago: {
+            ObtenerCondicionesPagoNuevos: {
+                ObtenerCondicionesPagoNuevos: {
                     FechaAdmision: programa.FechaAdmision,//"201660",
                     EstudianteId: idEstudiante,//"000065646",
                     Jornada: programa.Jornada,//"N",
@@ -24,12 +24,12 @@ export const useAxiosCondicionesPago = () => {
         const headers = {
             'apikey': apikey, //'uxpWFePgheXvuP9Tun8TYxvjb0FgeSLH',
             'Content-Type': 'application/json',
-            'SOAPAction': 'ObtenerCondicionesPago'
+            'SOAPAction': 'ObtenerCondicionesPagoNuevos'
         };
 
         try {
             const { data } = await axios.post(url, dataContract, { headers });
-            if (data.Envelope.Body.ObtenerCondicionesPagoResponse.ObtenerCondicionesPagoResponse.CondicionesFacturacion === "") {
+            if (data.Envelope.Body.ObtenerCondicionesPagoNuevosResponse.ObtenerCondicionesPagoNuevosResponse.CondicionesFacturacion === "") {
 
 
                 const fechaActual = new Date();
@@ -38,8 +38,8 @@ export const useAxiosCondicionesPago = () => {
                 const year = fechaActual.getFullYear();
                 const fechaCompleta = `${dia}/${mes}/${year}`; // Formato: DD/MM/YYYY
 
-                const codigo = data.Envelope.Body.ObtenerCondicionesPagoResponse.ObtenerCondicionesPagoResponse.ResultadoTransaccion.Codigo;
-                const mensaje = data.Envelope.Body.ObtenerCondicionesPagoResponse.ObtenerCondicionesPagoResponse.ResultadoTransaccion.Mensaje;
+                const codigo = data.Envelope.Body.ObtenerCondicionesPagoNuevosResponse.ObtenerCondicionesPagoNuevosResponse.ResultadoTransaccion.Codigo;
+                const mensaje = data.Envelope.Body.ObtenerCondicionesPagoNuevosResponse.ObtenerCondicionesPagoNuevosResponse.ResultadoTransaccion.Mensaje;
                 if (codigo === "Z8008") {
                     mostrarAlertaExitoSinTimer(`${fechaCompleta} Matriculas - El recibo de pago ya fue registrado como pagado, por favor acercarse al área de facturación de su sede`);
                 } else {
@@ -48,7 +48,7 @@ export const useAxiosCondicionesPago = () => {
                 return;
             }
 
-            const { CondicionFacturacion } = data.Envelope.Body.ObtenerCondicionesPagoResponse.ObtenerCondicionesPagoResponse.CondicionesFacturacion;
+            const { CondicionFacturacion } = data.Envelope.Body.ObtenerCondicionesPagoNuevosResponse.ObtenerCondicionesPagoNuevosResponse.CondicionesFacturacion;
             //console.log(CondicionFacturacion,data);
 
             //Filrtos condiciones de pago que no sean ZDU1 O UN ZDU2 , ZRU1 , ZRU2
