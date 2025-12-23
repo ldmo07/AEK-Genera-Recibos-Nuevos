@@ -11,6 +11,8 @@ import { SpanErrorComponents } from "../../components/SpanErrorComponents";
 import { TooltipComponents } from "../../components/TooltipComponents";
 import { urlPagoPSE } from "../../helpers/serviciosUrl";
 import { useAxiosEstudiantesNuevos } from "../../hooks/useAxiosEstudiantesNuevos";
+import { encrypt, keyEncryptDecrypt } from "../../helpers/EncryptDecryptHelper";
+import {useAxiosSendEmails} from "../../hooks/useAxiosSendEmails";
 
 export default Screen = () => {
 
@@ -70,7 +72,7 @@ export default Screen = () => {
     const [valorDebitoDebounced, setValorDebitoDebounced] = useState('');
     const [valorCreditoDebounced, setValorCreditoDebounced] = useState('');
     const [valorChekeDebounced, setValorChekeDebounced] = useState('');
-
+    const { enviarCorreoElectronico } = useAxiosSendEmails();
 
     // muestra el span con los valores de financiacion parcial
     const obtenerValorFinanciadoCalculado = () => {
@@ -246,7 +248,7 @@ export default Screen = () => {
 
         try {
             setMostrarDivCargando(true);
-            const { id, msg, mail, status } = await consultarDatosEstudiantesNuevos(nDocEstudianteNuevo, fNacimientoEstudianteNuevo);
+            const { id, msg, mail, mail2 = "", status } = await consultarDatosEstudiantesNuevos(nDocEstudianteNuevo, fNacimientoEstudianteNuevo);
             //alert(status)
             if (status == 2) {
                 // si el estudiante existe le muestro el formulario
@@ -263,10 +265,26 @@ export default Screen = () => {
 
             } else if (status == 1) {
                 setShowFormularioEstudiante(false);
-                const res = await mostrarAlertaConfirmacionSinCancelar("Estimado usuario, por favor ingrese con el perfil Estudiante Antiguo, mediante correo institucional",
-                    "Dar clic Aquí");
-                if (res.isConfirmed === true) {
-                    window.open('https://uniminuto-sandbox.campusm.exlibrisgroup.com/campusm/home#select-profile')
+                // const res = await mostrarAlertaConfirmacionSinCancelar("Estimado usuario, por favor ingrese con el perfil Estudiante Antiguo, mediante correo institucional",
+                //     "Dar clic Aquí");
+                // if (res.isConfirmed === true) {
+                //     window.open('https://uniminuto-sandbox.campusm.exlibrisgroup.com/campusm/home#select-profile')
+                // }
+
+                // si existe un correo personal realizo un envio a ese correo con la informacion
+                if (mail2 != "") {
+                    const mensaje = `Estimado usuario el sistema ha identificado que es necesario ingresar utilizando el perfil de Estudiante Antiguo.
+        para continuar el proceso, enviaremos una notificacion al correo personal ${mail} notificando su correo institucional. Si requiere realizar
+        cambio de contraseña puedes hacerlo a través del siguiente enlace: <a href="https://tuclave.uniminuto.edu/">https://tuclave.uniminuto.edu/</a>`
+
+                    //encripto el correo alternativo
+                    const correoEnc = encrypt(keyEncryptDecrypt, mail2);
+                    //Realizo el envio  del correo
+                    await enviarCorreoElectronico(correoEnc, mail)
+                    await mostrarAlertaConfirmacionSinCancelar(mensaje,"Ok")
+
+                } else {
+                    mostrarAlertaError("No tienes un correo alterno asignado")
                 }
 
             } else if (status == 0) {

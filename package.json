@@ -19,6 +19,7 @@
     "@ombiel/aek-css": "1.x.x",
     "@ombiel/aek-lib": "1.x.x",
     "axios": "^1.6.8",
+    "crypto-js": "^4.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.6.6",
     "react-icons": "^5.2.1",
