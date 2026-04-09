@@ -7,7 +7,7 @@
 // export const apikey='ITnjVcrLWfYpY2B246EcrWO6Hln3LD7a';
 //export const apikey2='ITnjVcrLWfYpY2B246EcrWO6Hln3LD7a';
 //export const urlGenearIdPSE='https://uniminuto.api.digibee.io/pipeline/uniminuto/v1/pasarelas-pago/linkPagoZonaPagos';
-export const urlPagoPSE= 'https://www.zonapagos.com/t_uniminuto/pago.asp?estado_pago=iniciar_pago&identificador='
+//export const urlPagoPSE= 'https://www.zonapagos.com/t_uniminuto/pago.asp?estado_pago=iniciar_pago&identificador='
 
 // TODO:: Para producccion cambiar la url urlObtenerCondicionesPago
 //DATOS DE DESARROLLO
@@ -19,7 +19,7 @@ export const urlRutaBaseRecibos = 'https://wwwquas.uniminuto.edu/repoqa';//'http
 export const apikey= 'uxpWFePgheXvuP9Tun8TYxvjb0FgeSLH';
 export const apikey2='5H9CcvkLZJTgPDDCXTXTI7KC90k6prl0';
 export const urlGenearIdPSE='https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/pasarelas-pago/linkPagoZonaPagos'
-//export const urlPagoPSE = 'https://www.zonapagos.com/t_uniminutopasp/pago.asp?estado_pago=iniciar_pago&identificador=' //'https://www.zonapagosdemo.com/t_uniminuto/pago.asp?estado_pago=iniciar_pago&identificador='
+export const urlPagoPSE = 'https://www.zonapagos.com/t_uniminutopasp/pago.asp?estado_pago=iniciar_pago&identificador=' //'https://www.zonapagosdemo.com/t_uniminuto/pago.asp?estado_pago=iniciar_pago&identificador='
 export const urlConsultarEstudiantesNuevos ='https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/servicios-banner/nuevosEstudiantes?doc=[1]&date=[2]' //'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/servicios-banner-dos/nuevosEstudiantes?doc=[1]&date=[2]'
 
 

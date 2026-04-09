@@ -89,22 +89,23 @@ export const useAxiosReciboPago = () => {
                 telefono: datosEstudiante.TelefonoMovil//"3154372348"
             }
         }
+        
         //TODO:: Cambiar url para produccion y desarrollo segun se necesite
         //URL DESARROLLO
-        // const url = urlGenearIdPSE;//'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/pasarelas-pago/linkPagoZonaPagos';
-        // const headers = {
-        //     'apikey': apikey,//'uxpWFePgheXvuP9Tun8TYxvjb0FgeSLH',
-        //     'Content-Type': 'application/json',
-        //     'SOAPAction': 'ZonaPagosPSE'
-        // };
-
-        //URL PROD
-        const url = 'https://uniminuto.api.digibee.io/pipeline/uniminuto/v1/pasarelas-pago/linkPagoZonaPagos';
+        const url = urlGenearIdPSE;//'https://uniminuto.test.digibee.io/pipeline/uniminuto/v1/pasarelas-pago/linkPagoZonaPagos';
         const headers = {
-            'apikey': 'ITnjVcrLWfYpY2B246EcrWO6Hln3LD7a',
+            'apikey': apikey,//'uxpWFePgheXvuP9Tun8TYxvjb0FgeSLH',
             'Content-Type': 'application/json',
             'SOAPAction': 'ZonaPagosPSE'
         };
+
+        //URL PROD
+        // const url = 'https://uniminuto.api.digibee.io/pipeline/uniminuto/v1/pasarelas-pago/linkPagoZonaPagos';
+        // const headers = {
+        //     'apikey': 'ITnjVcrLWfYpY2B246EcrWO6Hln3LD7a',
+        //     'Content-Type': 'application/json',
+        //     'SOAPAction': 'ZonaPagosPSE'
+        // };
         
         try {
 
