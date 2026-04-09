@@ -9,6 +9,7 @@ import { estiloFuentes, estiloBadges, estiloBadges2, estiloBase, estiloHover } f
 import { lstEntidadFinanciacion, lstOpcionesDonacion, valorMinimoFinanciar, mensajeConfirmacionGenerarRecibo, CodigosCombinacionPago, valorMinimoCombinacionPago } from "../../helpers/valoresFijos"
 import { SpanErrorComponents } from "../../components/SpanErrorComponents";
 import { TooltipComponents } from "../../components/TooltipComponents";
+import {CountdownWrapper} from "../../components/CountdownWrapper";
 import { urlPagoPSE } from "../../helpers/serviciosUrl";
 import { useAxiosEstudiantesNuevos } from "../../hooks/useAxiosEstudiantesNuevos";
 import { encrypt, hideText, keyEncryptDecrypt } from "../../helpers/EncryptDecryptHelper";
@@ -708,7 +709,7 @@ export default Screen = () => {
 
 
     return (
-        <>
+        <CountdownWrapper seconds={10}>
             <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
 
             <div className="container mx-auto px-4 py-10 bg-gray p-4" style={estiloFuentes}>
@@ -1291,7 +1292,7 @@ export default Screen = () => {
                 }
             </div>
 
-        </>)
+        </CountdownWrapper>)
 }
 
 
